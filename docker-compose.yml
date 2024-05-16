@@ -1,0 +1,41 @@
+version: '3.9'
+services:
+  keycloak:
+    image: keycloak/keycloak:latest
+    restart: always
+    depends_on:
+      - keycloak_postgres
+    ports:
+      - 8080:8080
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=massPay@dmin!
+      - KC_DB=postgres
+      - KC_DB_URL=jdbc:postgresql://keycloak_postgres/keycloak
+      - KC_DB_USER=keycloak
+      - KC_DB_PASSWORD=keycloAkM@ssPay!
+    command: start-dev
+    networks:
+      - keycloak_net
+
+  keycloak_postgres:
+    image: postgres:latest
+    container_name: keycloak_postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=keycloAkM@ssPay!
+      - POSTGRES_USER=keycloak
+      - POSTGRES_DB=keycloak
+      - PGDATA=/var/lib/postgresql/data
+    volumes:
+      - postgresql_volume:/var/lib/postgresql/data
+    networks:
+      - keycloak_net
+
+volumes:
+  postgresql_volume:
+
+networks:
+  keycloak_net:
+    driver: bridge

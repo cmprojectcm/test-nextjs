@@ -1,7 +1,0 @@
-# AUTH_SECRET=VgHJ0paOK/TqpQayLvyq36qyuKwgicO4Yjtq1z8f3k8=
-AUTH_KEYCLOAK_ID=masspay-frontend
-AUTH_KEYCLOAK_SECRET=bvR1BkecjiNExYZhmdvsbpeZmzEnCIgj
-AUTH_KEYCLOAK_ISSUER=http://localhost:8080/realms/masspay
-AUTH_URL=http://localhost:3000
-AUTH_SECRET=PRUEBA
-AUTH_TRUST_HOST=true

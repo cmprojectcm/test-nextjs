@@ -2,29 +2,30 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { authenticate, keycloakSession, logOut } from "./lib/actions";
-import { auth } from "./auth";
+import { SignIn } from "./components/signIn-button";
+import { SignOut } from "./components/signout-button";
+import { useCurrentSession } from "./lib/sessionActions";
 import { useEffect } from "react";
 
-// importing necessary functions
-
 export default function Home(props: any) {
-  // extracting data from usesession as session
-  const session = keycloakSession();
-
+  const { data: sessionData, status } = useSession();
+  useEffect(() => {
+    console.log("session: ", sessionData);
+  }, [sessionData]);
   return (
     <div>
-      {session?.data ? (
+      {sessionData ? (
         <>
-          <p>Welcome {session.user?.name}. Signed In As</p>
-          <p>{session.user?.email}</p>
-          <button onClick={() => logOut()}>Sign out</button>
+          <p>Welcome {sessionData?.user?.name}. Signed In As</p>
+          <p>{sessionData?.user?.email}</p>
+          <p>Expires on: {sessionData?.expires}</p>
+          <p>Date now: {Date.now()}</p>
+          <SignOut />
         </>
       ) : (
         <>
           <p>Not Signed In</p>
-          {/* <button onClick={async () => await signIn("keycloak")}></button> */}
-          <button onClick={() => authenticate()}>Sign in with keycloak</button>
+          <SignIn />
         </>
       )}
     </div>
