@@ -9,9 +9,7 @@ import { useEffect } from "react";
 
 export default function Home(props: any) {
   const { data: sessionData, status } = useSession();
-  useEffect(() => {
-    console.log("session: ", sessionData);
-  }, [sessionData]);
+
   return (
     <div>
       {sessionData ? (
